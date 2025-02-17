@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja</title>
+
+    @vite('resources/css/app.css')
+</head>
+<body class="container mx-auto">
+    <header>
+        <nav>
+            <ul class="flex justify-center space-x-4 my-4">
+                <li><a href="/">Home</a></li>
+                <li><a href="/ninja">Ninja</a></li>
+                <li><a href="/add-ninja">Add New Ninja</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="my-6 min-h-screen">
+        {{ $slot }}
+    </main>
+    <footer>
+        <p>&copy; 2021 Ninja</p>
+    </footer>
+</body>
+</html>
