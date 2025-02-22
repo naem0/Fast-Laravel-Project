@@ -14,7 +14,7 @@
 
 <x-layout>
     <div class="">
-        <h1 class="text-2xl font-bold">Ninja</h1>
-        <a href="/ninja">Go To Ninja</a>
+        <h1 class="text-2xl font-bold">User</h1>
+        <a href="/ninja">Go To User</a>
     </div>
 </x-layout>

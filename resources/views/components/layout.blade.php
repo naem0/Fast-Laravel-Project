@@ -12,8 +12,8 @@
         <nav>
             <ul class="flex justify-center space-x-4 my-4">
                 <li><a href="/">Home</a></li>
-                <li><a href="/ninja">Ninja</a></li>
-                <li><a href="/add-ninja">Add New Ninja</a></li>
+                <li><a href="/ninja">User</a></li>
+                <li><a href="/add-ninja">Add New User</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
         </nav>
@@ -22,7 +22,7 @@
         {{ $slot }}
     </main>
     <footer>
-        <p>&copy; 2021 Ninja</p>
+        <p class="text-center">&copy; 2025 Ninja</p>
     </footer>
 </body>
 </html>

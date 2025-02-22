@@ -7,26 +7,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/ninja', [NinjaController::class, "allNinja"] );
+Route::get('/ninja', [NinjaController::class, "allNinja"] )->name('ninja'); ;
 
-Route::get('/ninja/{id}', function ($id) {
-    // Ninja Damo data array of objects with name, id, status, skill, and weapon
-    $ninjas = [
-        (object) ['name' => 'Damo', 'id' => 1, 'status' => true, 'skill' => 'Ninjutsu', 'weapon' => 'Katana'],
-        (object) ['name' => 'Koji', 'id' => 2, 'status' => true, 'skill' => 'Ninjutsu', 'weapon' => 'Kunai'],
-        (object) ['name' => 'Kara', 'id' => 3, 'status' => false, 'skill' => 'Ninjutsu', 'weapon' => 'Shuriken'],
-        (object) ['name' => 'Jigen', 'id' => 4, 'status' => true, 'skill' => 'Ninjutsu', 'weapon' => 'Kunai'],
-        (object) ['name' => 'Kawaki', 'id' => 5, 'status' => true, 'skill' => 'Ninjutsu', 'weapon' => 'Katana'],
-        (object) ['name' => 'Sarada', 'id' => 6, 'status' => false, 'skill' => 'Ninjutsu', 'weapon' => 'Shuriken'],
-        (object) ['name' => 'Boruto', 'id' => 7, 'status' => false, 'skill' => 'Ninjutsu', 'weapon' => 'Kunai'],
-        (object) ['name' => 'Mitsuki', 'id' => 8, 'status' => true, 'skill' => 'Ninjutsu', 'weapon' => 'Katana'],
-        (object) ['name' => 'Konohamaru', 'id' => 9, 'status' => true, 'skill' => 'Ninjutsu', 'weapon' => 'Kunai'],
-        (object) ['name' => 'Sasuke', 'id' => 10, 'status' => true, 'skill' => 'Ninjutsu', 'weapon' => 'Katana'],
-    ];
+Route::get('/ninja/{id}', [NinjaController::class, "showNinja"] )->name('ninja.show');
 
-    // Find the ninja with the id
-    $ninja = collect($ninjas)->firstWhere('id', $id);
+// Show the form
+Route::get('/add-ninja', [NinjaController::class, "showForm"])->name('ninja.form');
 
-    // Return the view with the ninja data
-    return view('ninja.show', compact('ninja'));
-});
+// Handle form submission
+Route::post('/add-ninja', [NinjaController::class, "addNinja"])->name('ninja.add');
+
+// Destroy ninja
+Route::delete('/ninja/{id}', [NinjaController::class, "destroyNinja"])->name('ninja.destroy');
+
+// Show the edit form
+Route::get('/ninja/{id}/edit', [NinjaController::class, "showEditForm"])->name('ninja.edit');
+
+// Handle edit form submission
+Route::put('/ninja/{id}', [NinjaController::class, "updateNinja"])->name('ninja.update');
+
+
