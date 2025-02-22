@@ -47,6 +47,7 @@ class NinjaController extends Controller
     // Handle form submission
     public function addNinja(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users'],
@@ -59,7 +60,7 @@ class NinjaController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password), // Hashing password
-                'phone' => $request->phone,
+                'phone' => $request->phone ?? '',
                 'status' => $request->has('status') ? 1 : 0, // Handling checkbox
             ]);
         } catch (\Exception $e) {

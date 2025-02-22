@@ -17,7 +17,7 @@
 
             <div class="form-group mb-5">
                 <label for="phone" class="block mb-2">Phone</label>
-                <input type="number" name="phone" class="form-control w-full p-2 border rounded" value="{{ $ninja->phone }}" required>
+                <input type="text" name="phone" class="form-control w-full p-2 border rounded" value="{{ $ninja->phone }}" required>
             </div>
 
             <div class="form-group mb-5">
