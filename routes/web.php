@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NinjaController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,5 +26,28 @@ Route::get('/ninja/{id}/edit', [NinjaController::class, "showEditForm"])->name('
 
 // Handle edit form submission
 Route::put('/ninja/{id}', [NinjaController::class, "updateNinja"])->name('ninja.update');
+
+// Show all users
+Route::get('/users', [UserController::class, "allUser"])->name('users');
+
+// Show the user
+Route::get('/user/{id}', [UserController::class, "showUser"])->name('users.show');
+
+// Show the add user form
+Route::get('/add-user', [UserController::class, "showForm"])->name('user.form');
+
+// Handle form submission
+Route::post('/add-user', [UserController::class, "addUser"])->name('user.add');
+
+// Destroy user
+Route::delete('/user/{id}', [UserController::class, "destroyUser"])->name('user.destroy');
+
+// Show the edit form
+Route::get('/user/{id}/edit', [UserController::class, "showEditForm"])->name('user.edit');
+
+// Handle edit form submission
+Route::put('/user/{id}', [UserController::class, "updateUser"])->name('user.update');
+
+
 
 

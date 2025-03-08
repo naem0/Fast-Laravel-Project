@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dojo;
+use App\Models\Ninja;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +22,7 @@ class NinjaController extends Controller
         // $ninjas = DB::table('users')->where('user_type', 4)->whereNotNull('name')->where('name', '!=', '')->orderByDesc('id')->get();
 
         // get all the ninja data from User model
-        $ninjas = User::all();
+        $ninjas = Ninja::all();
 
         // Return the view with the ninja data
         return view('ninja.index', compact('ninjas'));
@@ -32,7 +34,7 @@ class NinjaController extends Controller
         // $ninja = DB::table('users')->where('id', $id)->first();
 
         // get the ninja data from User model
-        $ninja = User::find($id);
+        $ninja = Ninja::find($id);
 
         // Return the view with the ninja data
         return view('ninja.show', compact('ninja'));
@@ -41,27 +43,28 @@ class NinjaController extends Controller
   // Show the add ninja form
     public function showForm(): View
     {
-        return view('ninja.add');
+        $dojos = Dojo::all();
+        return view('ninja.add', compact('dojos'));
     }
 
     // Handle form submission
     public function addNinja(Request $request)
     {
+
         // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'string', 'min:4'],
-            'phone' => ['nullable', 'string', 'max:20'],
+            'rank' => ['required', 'string', 'max:255'],
+            'bio' => ['required', 'string'],
+            'dojo_id' => ['required', 'integer'],
         ]);
 
         try {
-            $ninja = User::create([
+            $ninja = Ninja::create([
                 'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password), // Hashing password
-                'phone' => $request->phone ?? '',
-                'status' => $request->has('status') ? 1 : 0, // Handling checkbox
+                'rank' => $request->rank,
+                'bio' => $request->bio,
+                'dojo_id' => $request->dojo_id,
             ]);
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Failed to add ninja: ' . $e->getMessage()]);
@@ -77,7 +80,7 @@ class NinjaController extends Controller
         // $ninja = DB::table('users')->where('id', $id)->first();
 
         // get the ninja data from User model
-        $ninja = User::find($id);
+        $ninja = Ninja::find($id);
 
         // destroy the ninja
         $ninja->forceDelete();
@@ -93,7 +96,7 @@ class NinjaController extends Controller
         // $ninja = DB::table('users')->where('id', $id)->first();
 
         // get the ninja data from User model
-        $ninja = User::find($id);
+        $ninja = Ninja::find($id);
 
         // Return the view with the ninja data
         return view('ninja.edit', compact('ninja'));

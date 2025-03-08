@@ -3,28 +3,32 @@
         @csrf <!-- Add CSRF token -->
 
         <div class="mb-4">
-            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-            <input type="text" name="name" id="name" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-800 p-3 rounded-md" required>
+            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+            <input value="{{ old('name') }}" type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
         </div>
 
         <div class="mb-4">
-            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-            <input type="email" name="email" id="email" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-800 p-3 rounded-md" required>
+            <label for="rank" class="block text-gray-700 text-sm font-bold mb-2">Rank:</label>
+            <input value="{{ old('rank') }}" type="text" name="rank" id="rank" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
         </div>
 
         <div class="mb-4">
-            <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-            <input type="text" name="phone" id="phone" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-800 p-3 rounded-md">
+            <label for="bio" class="block text-gray-700 text-sm font-bold mb-2">Bio:</label>
+            <textarea name="bio" id="bio" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                {{ old('bio') }}
+            </textarea>
         </div>
 
         <div class="mb-4">
-            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-            <input type="password" name="password" id="password" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-800 p-3 rounded-md" required>
-        </div>
-
-        <div class="mb-4">
-            <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-            <input type="checkbox" name="status" id="status" class="mt-1">
+            <label for="dojo" class="block text-gray-700 text-sm font-bold mb-2">Dojo:</label>
+            <select name="dojo_id" id="dojo" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                <option value="" disabled selected>Select a dojo</option>
+                @foreach($dojos as $dojo)
+                <option 
+                    value="{{ $dojo->id }}" 
+                >{{ $dojo->name }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="mb-4">
@@ -34,19 +38,19 @@
 
     <!-- Display success message -->
     @if(session('success'))
-        <div class="bg-green-500 text-white p-3 rounded mt-4">
-            {{ session('success') }}
-        </div>
+    <div class="bg-green-500 text-white p-3 rounded mt-4">
+        {{ session('success') }}
+    </div>
     @endif
 
     <!-- Display errors -->
     @if($errors->any())
-        <div class="bg-red-500 text-white p-3 rounded mt-4">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    <div class="bg-red-500 text-white p-3 rounded mt-4">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
 </x-layout>
