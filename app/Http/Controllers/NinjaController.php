@@ -97,9 +97,10 @@ class NinjaController extends Controller
 
         // get the ninja data from User model
         $ninja = Ninja::find($id);
+        $dojos = Dojo::all();
 
         // Return the view with the ninja data
-        return view('ninja.edit', compact('ninja'));
+        return view('ninja.edit', compact('ninja'), compact('dojos'));
     }
 
     // update ninja

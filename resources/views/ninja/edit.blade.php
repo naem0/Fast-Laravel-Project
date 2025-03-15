@@ -20,8 +20,12 @@
             </div>
 
             <div class="form-group mb-5">
-                <label for="dojo_id" class="block mb-2">Dojo ID</label>
-                <input type="number" name="dojo_id" class="form-control w-full p-2 border rounded" value="{{ $ninja->dojo_id }}" required>
+                <label for="dojo_id" class="block mb-2">Dojo</label>
+                <select name="dojo_id" class="form-control w-full p-2 border rounded" required>
+                    @foreach($dojos as $dojo)
+                        <option value="{{ $dojo->id }}" {{ $dojo->id == $ninja->dojo_id ? 'selected' : '' }}>{{ $dojo->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary w-full p-2 rounded bg-blue-500 text-white">Update</button>

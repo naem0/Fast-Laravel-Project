@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DojoController;
 use App\Http\Controllers\NinjaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -50,4 +51,11 @@ Route::put('/user/{id}', [UserController::class, "updateUser"])->name('user.upda
 
 
 
+// show all dojo
+Route::get('/dojos', [DojoController::class, "allDojo"])->name('dojos');
 
+// show the dojo
+Route::get('/dojo/{id}', [DojoController::class, "showDojo"])->name('dojos.show');
+
+// distroy dojo
+Route::delete('/dojo/{id}', [DojoController::class, "destroyDojo"])->name('dojos.destroy');
